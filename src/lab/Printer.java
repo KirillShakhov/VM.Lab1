@@ -17,8 +17,8 @@ public class Printer {
 
         public void printVector(String message, ArrayList<Double> list){
         System.out.println(message);
-        for(int i = 0; i > list.size(); i++){
-            System.out.println("["+(i+1)+"] = "+list.get(i));
+        for(int i = 0; i < list.size(); i++){
+            System.out.println("["+(i+1)+"] = "+String.format("%.6f",list.get(i)));
         }
     }
 
@@ -37,23 +37,6 @@ public class Printer {
 
     public void notDiagonalAll() {
         System.out.println("Отсутствие диагонального преобладания");
-    }
-
-    public void printResult(double [] result, int iterations, double [] localEps){
-
-        System.out.println("Количество итераций:\n"+iterations);
-
-        System.out.println("Ответ:");
-        for (int i = 0; i < result.length;i++) {
-            System.out.print("x"+i+": ");
-            System.out.println(new BigDecimal(result[i], context));
-        }
-
-        System.out.print("Невязки:\n");
-        for (int i = 0; i < result.length;i++) {
-            System.out.print("x"+i+" +-");
-            System.out.println(new BigDecimal(localEps[i], context));
-        }
     }
 
     @Override
