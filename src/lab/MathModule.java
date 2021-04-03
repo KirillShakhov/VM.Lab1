@@ -6,6 +6,7 @@ import static java.lang.Math.abs;
 
 public class MathModule {
     private static Printer pr = new Printer();
+    private static double[][] val;
     public MathModule() {
     }
 
@@ -18,7 +19,7 @@ public class MathModule {
             pr.printVector("Вектор невязки: ", rs.getResiduals());
             return;
         }
-        double[][] val = permuteMatrixHelper(matrix,0);
+        permuteMatrixHelper(matrix,0);
         if (val!= null){
             Matrix matrix1 = new Matrix(val);
             pr.print("Матрица после перестановки строк");
@@ -48,8 +49,7 @@ public class MathModule {
         return (k == 1);
     }
 
-    public static double[][] permuteMatrixHelper(Matrix matrix, int index) {
-        double[][] val = null;
+    private static void permuteMatrixHelper(Matrix matrix, int index) {
         if(index >= matrix.getMatrix().length - 1){
             if (checkDiagonal(matrix.getMatrix(), matrix.getSize())){
                 val = new double[matrix.getSize()][matrix.getSize()+1];
@@ -59,7 +59,7 @@ public class MathModule {
                     }
                 }
             }
-            return val;
+            return;
         } else {
             for (int i = index; i < matrix.getMatrix().length; i++) {
                 double[] t = matrix.getMatrix()[index];
@@ -72,8 +72,8 @@ public class MathModule {
                 matrix.getMatrix()[index] = matrix.getMatrix()[i];
                 matrix.getMatrix()[i] = t;
             }
+            pr.printMatrix(matrix);
         }
-        return val;
     }
 
     private static ResultSet solve(Matrix matrix, double eps) {

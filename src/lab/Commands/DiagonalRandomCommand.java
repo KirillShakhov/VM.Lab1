@@ -5,8 +5,6 @@ import lab.Matrix;
 
 import java.util.Scanner;
 
-import static lab.MathModule.permuteMatrixHelper;
-
 public class DiagonalRandomCommand implements ICommand{
     private final Scanner scanner = new Scanner(System.in);
 
@@ -33,17 +31,11 @@ public class DiagonalRandomCommand implements ICommand{
         Matrix matrix;
         do {
             matrix = createRandomMatrix(size);
-            double[][] val = permuteMatrixHelper(matrix,0);
-            if (val!= null) {
-                matrix = new Matrix(val);
-            }
         } while (!MathModule.checkDiagonal(matrix.getMatrix(), size));
         MathModule.findSolution(matrix, eps);
     }
 
     public Matrix createRandomMatrix(int size) {
-        int max = 10;
-        int min = 0;
         try{
             if (size > 20 || size <= 0) {
                 throw new Exception();
@@ -51,12 +43,7 @@ public class DiagonalRandomCommand implements ICommand{
             double[][] matrix = new double[size][size + 1];
             for (int i = 0; i < matrix.length; i++) {
                 for (int j = 0; j < matrix.length + 1; j++) {
-                    if(i == j){
-                        matrix[i][j] = Math.random() * (100 - 45) + 45;
-                    }
-                    else {
-                        matrix[i][j] = Math.random() * (max - min) + min;
-                    }
+                    matrix[i][j] = Math.random() * 50 - 25;
                 }
             }
             return new Matrix(matrix);
